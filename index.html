@@ -8,6 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    html { scroll-padding-top: 5rem; }
     .grid-bg {
       background-image:
         linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
@@ -25,34 +26,77 @@
         <span class="font-bold tracking-tight text-lg">SS Unlimited</span>
         <span class="text-xs text-zinc-500">LLC</span>
       </div>
-      <div class="flex gap-6 text-sm">
+
+      <!-- Desktop nav -->
+      <div class="hidden md:flex gap-6 text-sm items-center">
         <a href="#services" class="text-zinc-400 hover:text-white transition">Services</a>
         <a href="#capabilities" class="text-zinc-400 hover:text-white transition">Capabilities</a>
-        <a href="#technologies" class="text-zinc-400 hover:text-white transition hidden md:inline">Technologies</a>
+        <a href="#technologies" class="text-zinc-400 hover:text-white transition">Technologies</a>
         <a href="#about" class="text-zinc-400 hover:text-white transition">About</a>
         <a href="#contact" class="text-emerald-400 hover:text-emerald-300 transition font-medium">Get in touch</a>
+      </div>
+
+      <!-- Mobile hamburger button -->
+      <button id="mobile-menu-btn" class="md:hidden text-zinc-300 p-2 -mr-2" aria-label="Menu">
+        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800/60 bg-zinc-950">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4 text-base">
+        <a href="#services" class="text-zinc-300 hover:text-white transition py-2">Services</a>
+        <a href="#capabilities" class="text-zinc-300 hover:text-white transition py-2">Capabilities</a>
+        <a href="#technologies" class="text-zinc-300 hover:text-white transition py-2">Technologies</a>
+        <a href="#about" class="text-zinc-300 hover:text-white transition py-2">About</a>
+        <a href="#contact" class="text-emerald-400 hover:text-emerald-300 transition py-2 font-medium">Get in touch</a>
       </div>
     </div>
   </nav>
 
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+    // Close menu when a link is clicked
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      });
+    });
+  </script>
+
   <!-- HERO -->
   <section class="grid-bg border-b border-zinc-800/60">
-    <div class="max-w-6xl mx-auto px-6 py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 py-16 sm:py-24 md:py-32">
       <div class="inline-block px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-6">
         Open for new clients
       </div>
-      <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
-        Your network,<br>
-        <span class="text-emerald-400">managed like it matters.</span>
+      <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+        Your network, <span class="text-emerald-400">managed like it matters.</span>
       </h1>
-      <p class="text-xl md:text-2xl text-zinc-400 max-w-3xl mb-10 leading-relaxed">
+      <p class="text-lg sm:text-xl md:text-2xl text-zinc-400 max-w-3xl mb-10 leading-relaxed">
         SS Unlimited is a network service provider for businesses, government teams, and MSPs. One team handling design, deployment, monitoring, and the automation that keeps it all running — so you don't have to.
       </p>
-      <div class="flex flex-wrap gap-4">
-        <a href="#services" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold rounded-lg transition">
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+        <a href="#services" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-zinc-950 font-semibold rounded-lg transition text-center">
           See how we work →
         </a>
-        <a href="#contact" class="px-6 py-3 border border-zinc-700 hover:border-zinc-500 rounded-lg transition">
+        <a href="#contact" class="px-6 py-3 border border-zinc-700 hover:border-zinc-500 active:border-zinc-400 rounded-lg transition text-center">
           Talk to our team
         </a>
       </div>
@@ -60,8 +104,8 @@
   </section>
 
   <!-- VALUE PROPS -->
-  <section class="py-20 border-b border-zinc-800/60">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+  <section class="py-14 sm:py-20 border-b border-zinc-800/60">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 md:gap-10">
       <div>
         <div class="text-emerald-400 text-2xl mb-3">⚙</div>
         <h3 class="font-semibold text-lg mb-2">Battle-tested</h3>
@@ -87,7 +131,7 @@
   </section>
 
   <!-- BY THE NUMBERS -->
-  <section class="py-16 border-b border-zinc-800/60 bg-zinc-900/30">
+  <section class="py-12 sm:py-16 border-b border-zinc-800/60 bg-zinc-900/30">
     <div class="max-w-6xl mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         <div>
@@ -111,16 +155,16 @@
   </section>
 
   <!-- SERVICES -->
-  <section id="services" class="py-24 border-b border-zinc-800/60">
+  <section id="services" class="py-16 sm:py-24 border-b border-zinc-800/60">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">How we work</h2>
-      <p class="text-zinc-400 text-lg mb-16 max-w-2xl">
+      <p class="text-zinc-400 text-base sm:text-lg mb-10 sm:mb-16 max-w-2xl">
         Two ways to engage with us. Ongoing partnership for teams that want us in the trenches with them. Fixed-scope projects for teams that need something built once and built right.
       </p>
 
       <!-- MANAGED SERVICES -->
-      <div class="mb-20">
-        <div class="flex items-baseline gap-4 mb-8">
+      <div class="mb-16 sm:mb-20">
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-8">
           <h3 class="text-2xl md:text-3xl font-bold">Managed Services</h3>
           <span class="text-emerald-400 text-sm font-medium">Ongoing partnership</span>
         </div>
@@ -128,7 +172,7 @@
         <div class="grid md:grid-cols-3 gap-6">
 
           <!-- Tier 1 -->
-          <div class="border border-zinc-800 rounded-xl p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
+          <div class="border border-zinc-800 rounded-xl p-6 sm:p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
             <div class="text-xs font-medium text-emerald-400 mb-3 tracking-wider">ESSENTIALS</div>
             <h4 class="text-xl font-bold mb-3">Network Monitoring</h4>
             <div class="text-3xl font-bold mb-1">from $1,500</div>
@@ -145,7 +189,7 @@
           </div>
 
           <!-- Tier 2 -->
-          <div class="border border-emerald-500/40 rounded-xl p-8 bg-emerald-500/5 hover:border-emerald-500/60 transition relative">
+          <div class="border border-emerald-500/40 rounded-xl p-6 sm:p-8 bg-emerald-500/5 hover:border-emerald-500/60 transition relative">
             <div class="absolute -top-3 left-8 px-2 py-0.5 bg-emerald-500 text-zinc-950 text-xs font-semibold rounded">MOST POPULAR</div>
             <div class="text-xs font-medium text-emerald-400 mb-3 tracking-wider">MANAGED</div>
             <h4 class="text-xl font-bold mb-3">Full Network Management</h4>
@@ -163,7 +207,7 @@
           </div>
 
           <!-- Tier 3 -->
-          <div class="border border-zinc-800 rounded-xl p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
+          <div class="border border-zinc-800 rounded-xl p-6 sm:p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
             <div class="text-xs font-medium text-emerald-400 mb-3 tracking-wider">STRATEGIC</div>
             <h4 class="text-xl font-bold mb-3">Full-Stack Infrastructure</h4>
             <div class="text-3xl font-bold mb-1">from $7,500</div>
@@ -184,7 +228,7 @@
 
       <!-- PROJECT ENGAGEMENTS -->
       <div>
-        <div class="flex items-baseline gap-4 mb-8">
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 mb-8">
           <h3 class="text-2xl md:text-3xl font-bold">Project Engagements</h3>
           <span class="text-zinc-500 text-sm font-medium">Fixed scope, fixed price</span>
         </div>
@@ -192,7 +236,7 @@
         <div class="grid md:grid-cols-3 gap-6">
 
           <!-- Offer 1 -->
-          <div class="border border-zinc-800 rounded-xl p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
+          <div class="border border-zinc-800 rounded-xl p-6 sm:p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
             <div class="text-xs font-medium text-emerald-400 mb-3 tracking-wider">PROJECT 01</div>
             <h4 class="text-xl font-bold mb-3">Slack-Native Ops Bot</h4>
             <div class="text-2xl font-bold mb-1">from $5,500</div>
@@ -209,7 +253,7 @@
           </div>
 
           <!-- Offer 2 -->
-          <div class="border border-zinc-800 rounded-xl p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
+          <div class="border border-zinc-800 rounded-xl p-6 sm:p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
             <div class="text-xs font-medium text-emerald-400 mb-3 tracking-wider">PROJECT 02</div>
             <h4 class="text-xl font-bold mb-3">Alert Enrichment Pipeline</h4>
             <div class="text-2xl font-bold mb-1">from $4,000</div>
@@ -226,7 +270,7 @@
           </div>
 
           <!-- Offer 3 -->
-          <div class="border border-zinc-800 rounded-xl p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
+          <div class="border border-zinc-800 rounded-xl p-6 sm:p-8 bg-zinc-900/40 hover:border-zinc-700 transition">
             <div class="text-xs font-medium text-emerald-400 mb-3 tracking-wider">PROJECT 03</div>
             <h4 class="text-xl font-bold mb-3">Custom Analytics Stack</h4>
             <div class="text-2xl font-bold mb-1">from $7,500</div>
@@ -252,16 +296,16 @@
   </section>
 
   <!-- CAPABILITIES -->
-  <section id="capabilities" class="py-24 border-b border-zinc-800/60">
+  <section id="capabilities" class="py-16 sm:py-24 border-b border-zinc-800/60">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Capabilities</h2>
-      <p class="text-zinc-400 text-lg mb-16 max-w-2xl">
+      <p class="text-zinc-400 text-base sm:text-lg mb-10 sm:mb-16 max-w-2xl">
         Whether it's a managed service tier or a one-off project, this is the infrastructure we work with every day — the full bench available to our clients.
       </p>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-zinc-800/60 rounded-xl overflow-hidden border border-zinc-800/60">
 
-        <div class="bg-zinc-950 p-8">
+        <div class="bg-zinc-950 p-6 sm:p-8">
           <div class="text-emerald-400 text-xl mb-3">⬡</div>
           <h3 class="font-semibold text-lg mb-2">Network Design &amp; Setup</h3>
           <p class="text-zinc-400 leading-relaxed text-sm">
@@ -269,7 +313,7 @@
           </p>
         </div>
 
-        <div class="bg-zinc-950 p-8">
+        <div class="bg-zinc-950 p-6 sm:p-8">
           <div class="text-emerald-400 text-xl mb-3">◎</div>
           <h3 class="font-semibold text-lg mb-2">Remote Monitoring</h3>
           <p class="text-zinc-400 leading-relaxed text-sm">
@@ -277,7 +321,7 @@
           </p>
         </div>
 
-        <div class="bg-zinc-950 p-8">
+        <div class="bg-zinc-950 p-6 sm:p-8">
           <div class="text-emerald-400 text-xl mb-3">⚷</div>
           <h3 class="font-semibold text-lg mb-2">Secure Remote Access</h3>
           <p class="text-zinc-400 leading-relaxed text-sm">
@@ -285,7 +329,7 @@
           </p>
         </div>
 
-        <div class="bg-zinc-950 p-8">
+        <div class="bg-zinc-950 p-6 sm:p-8">
           <div class="text-emerald-400 text-xl mb-3">⊕</div>
           <h3 class="font-semibold text-lg mb-2">Domain &amp; DNS</h3>
           <p class="text-zinc-400 leading-relaxed text-sm">
@@ -293,7 +337,7 @@
           </p>
         </div>
 
-        <div class="bg-zinc-950 p-8">
+        <div class="bg-zinc-950 p-6 sm:p-8">
           <div class="text-emerald-400 text-xl mb-3">▤</div>
           <h3 class="font-semibold text-lg mb-2">Cloud &amp; Server Deployment</h3>
           <p class="text-zinc-400 leading-relaxed text-sm">
@@ -301,7 +345,7 @@
           </p>
         </div>
 
-        <div class="bg-zinc-950 p-8">
+        <div class="bg-zinc-950 p-6 sm:p-8">
           <div class="text-emerald-400 text-xl mb-3">≋</div>
           <h3 class="font-semibold text-lg mb-2">Wireless Infrastructure</h3>
           <p class="text-zinc-400 leading-relaxed text-sm">
@@ -314,10 +358,10 @@
   </section>
 
   <!-- TECHNOLOGIES -->
-  <section id="technologies" class="py-24 border-b border-zinc-800/60">
+  <section id="technologies" class="py-16 sm:py-24 border-b border-zinc-800/60">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl md:text-4xl font-bold mb-4">Technologies</h2>
-      <p class="text-zinc-400 text-lg mb-16 max-w-2xl">
+      <p class="text-zinc-400 text-base sm:text-lg mb-10 sm:mb-16 max-w-2xl">
         The platforms, vendors, and tools in daily use — from the wire to the cloud.
       </p>
 
@@ -358,10 +402,10 @@
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="py-24 border-b border-zinc-800/60">
+  <section id="about" class="py-16 sm:py-24 border-b border-zinc-800/60">
     <div class="max-w-3xl mx-auto px-6">
       <h2 class="text-3xl md:text-4xl font-bold mb-8">About</h2>
-      <div class="space-y-5 text-zinc-300 text-lg leading-relaxed">
+      <div class="space-y-5 text-zinc-300 text-base sm:text-lg leading-relaxed">
         <p>
           SS Unlimited, LLC is a Maryland-based network service provider serving businesses, government teams, and MSPs. We handle the design, deployment, monitoring, and automation of the network and infrastructure your organization runs on — as an ongoing partner or on well-defined projects.
         </p>
@@ -402,17 +446,17 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-24">
+  <section id="contact" class="py-16 sm:py-24">
     <div class="max-w-3xl mx-auto px-6 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold mb-6">Let's talk.</h2>
-      <p class="text-xl text-zinc-400 mb-10 leading-relaxed">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">Let's talk.</h2>
+      <p class="text-base sm:text-xl text-zinc-400 mb-10 leading-relaxed">
         Free 20-minute discovery call. Tell us about your network, your team, and what needs solving. Whether it's a one-time project or an ongoing partnership, we'll follow up within 48 hours with a clear next step.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="mailto:info@ssunlimitedllc.com" class="inline-block px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-semibold rounded-lg transition text-lg">
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-stretch sm:items-center max-w-md sm:max-w-none mx-auto">
+        <a href="mailto:info@ssunlimitedllc.com" class="block sm:inline-block px-6 sm:px-8 py-4 bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-zinc-950 font-semibold rounded-lg transition text-base sm:text-lg break-all sm:break-normal">
           info@ssunlimitedllc.com
         </a>
-        <a href="tel:7035012959" class="inline-block px-8 py-4 border border-zinc-700 hover:border-zinc-500 text-zinc-100 rounded-lg transition text-lg">
+        <a href="tel:7035012959" class="block sm:inline-block px-6 sm:px-8 py-4 border border-zinc-700 hover:border-zinc-500 active:border-zinc-400 text-zinc-100 rounded-lg transition text-base sm:text-lg">
           (703) 501-2959
         </a>
       </div>
@@ -420,11 +464,11 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="border-t border-zinc-800/60 py-10">
+  <footer class="border-t border-zinc-800/60 py-8 sm:py-10">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-zinc-500">
-      <div>© SS Unlimited, LLC · Maryland · USA</div>
-      <div class="flex gap-6">
-        <a href="mailto:info@ssunlimitedllc.com" class="hover:text-zinc-300 transition">info@ssunlimitedllc.com</a>
+      <div class="text-center md:text-left">© SS Unlimited, LLC · Maryland · USA</div>
+      <div class="flex flex-col sm:flex-row gap-2 sm:gap-6 items-center">
+        <a href="mailto:info@ssunlimitedllc.com" class="hover:text-zinc-300 transition break-all sm:break-normal">info@ssunlimitedllc.com</a>
         <a href="tel:7035012959" class="hover:text-zinc-300 transition">(703) 501-2959</a>
       </div>
     </div>
